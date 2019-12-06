@@ -7,4 +7,8 @@ namespace Type {
                   , Image
                   , Movie
                   }
+
+    public struct User {
+        string name;
+    }
 }
