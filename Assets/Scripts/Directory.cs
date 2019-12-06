@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Directory : MonoBehaviour
+public class Directory : Entry
 {
     public List<Entry> children;
     // Start is called before the first frame update
