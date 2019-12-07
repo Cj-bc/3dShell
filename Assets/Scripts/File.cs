@@ -11,6 +11,6 @@ public class File : Entry
     }
 
     private Type.FileType ftdetect() {
-      return Type.FileType.Normal;
+      return Type.FileType.Any;
     }
 }

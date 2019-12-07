@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Type {
-    public enum FileType { Normal
+    public enum FileType { Any
                          , Image
                          , Movie
                          }
