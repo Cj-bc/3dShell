@@ -25,7 +25,7 @@ public class Shell : MonoBehaviour
         if (entries.Count != 0)
             foreach (GameObject obj in entries) {Destroy(obj);}
 
-        foreach (Entry e in pwd.children) {
+        foreach (Entry e in pwd.children()) {
             GameObject newObj = Instantiate(e.model);
         }
     }
