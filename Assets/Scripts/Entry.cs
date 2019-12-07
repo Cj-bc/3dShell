@@ -14,12 +14,16 @@ public class Entry : MonoBehaviour
     public System.DateTime lastTouched;
     public GameObject model;
 
-    public Entry(string _path) {
+    protected Config config;
+
+    public Entry(string _path, Config _config) {
         path = _path;
         entryName = _path.Split('/').Last();
         parent = null;
         permission = 0b111000000; // TODO: get this from data
         lastTouched = System.DateTime.FromFileTime(0); // TODO: get this from data
-        model = Config.Models[FileType.Normal];
+        model = _config.models[FileType.Any];
+
+        config = _config;
     }
 }

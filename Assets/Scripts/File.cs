@@ -6,7 +6,7 @@ public class File : Entry
 {
     public Type.FileType type;
 
-    public File(string _path) : base (_path) {
+    public File(string _path, Config _config) : base (_path, _config) {
         type = ftdetect();
     }
 

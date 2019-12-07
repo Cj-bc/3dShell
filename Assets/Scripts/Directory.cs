@@ -20,18 +20,20 @@ public class Directory : Entry
         IEnumerable<string> directories = Dir.EnumerateDirectories(path);
         List<Entry> ret = new List<Entry>();
 
-        foreach (string f in files) { ret.Add(new File(f)); }
-        foreach (string d in directories) { ret.Add(getDirectoryStub(d)); }
+        foreach (string f in files) { ret.Add(new File(f, config)); }
+        foreach (string d in directories) { ret.Add(getDirectoryStub(d, config)); }
 
         return ret;
     }
 
-    public Directory(string _path) : base (_path) {
+    public Directory(string _path, Config _config) : base (_path, _config) {
             _children = this.getActualChildren();
         }
 
     // Create stub directory instance that doesn't hold children
     // This is required so that parent Directory holds only child dirs/files,
     // not grandchildren /great-grandchildren, ...
-    public static Directory getDirectoryStub(string d) => (Directory) new Entry(d);
+    public static Directory getDirectoryStub(string d, Config _config)  {
+      return (Directory) (new Entry(d, _config));
+    }
 }
