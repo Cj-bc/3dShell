@@ -7,6 +7,13 @@ public class Directory : Entry
 {
     private List<Entry> _children = new List<Entry>();
 
+    // Use this instead of _children so that 'stubbed' children are pulled
+    public List<Entry> children() {
+        if (_children.Count != 0)
+            return _children;
+
+        return getActualChildren();
+    }
 
     private List<Entry> getActualChildren() {
         IEnumerable<string> files       = Dir.EnumerateFiles(path);
