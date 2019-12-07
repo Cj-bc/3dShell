@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Directory : Entry
 {
-    public List<Entry> children;
+    private List<Entry> _children = new List<Entry>();
 }
