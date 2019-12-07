@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class File : Entry
 {
-    public FileType type;
+    public Type.FileType type;
 
 }
