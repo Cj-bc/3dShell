@@ -26,9 +26,12 @@ public class Directory : Entry
         return ret;
     }
 
+    public Directory(string _path) : base (_path) {
+            _children = this.getActualChildren();
+        }
+
     // Create stub directory instance that doesn't hold children
     // This is required so that parent Directory holds only child dirs/files,
     // not grandchildren /great-grandchildren, ...
     public static Directory getDirectoryStub(string d) => (Directory) new Entry(d);
-
 }
