@@ -12,6 +12,7 @@ public class Config : MonoBehaviour
     void Start()
     {
         models.Add(FileType.Any, PrefabUtility.LoadPrefabContents(Application.dataPath + "/Prefab/models/Any.prefab"));
+        models.Add(FileType.Directory, PrefabUtility.LoadPrefabContents(Application.dataPath + "/Prefab/models/Directory.prefab"));
     }
 
     // Update is called once per frame
