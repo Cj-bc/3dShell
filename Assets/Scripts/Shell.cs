@@ -15,7 +15,7 @@ public class Shell : MonoBehaviour
 
     void Awake()
     {
-        config = FindObjectOfType<Config>();
+        config = GetComponent<Config>();
         // currentUser = System.Environment.UserName;
         pwd = new Directory(Dir.GetCurrentDirectory(), config);
         updateEntryObjects();
