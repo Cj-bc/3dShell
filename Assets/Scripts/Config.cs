@@ -6,7 +6,7 @@ using Type;
 
 public class Config : MonoBehaviour
 {
-    public Dictionary<FileType, GameObject> models;
+    public Dictionary<FileType, GameObject> models = new Dictionary<FileType, GameObject>();
 
     // Start is called before the first frame update
     void Start()
