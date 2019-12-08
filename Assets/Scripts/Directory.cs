@@ -29,8 +29,9 @@ public class Directory : Entry
     public Directory() : base () { }
 
     public Directory(string _path, Config _config) : base (_path, _config) {
-            _children = this.getActualChildren();
-        }
+        _children = this.getActualChildren();
+        model = _config.models[Type.FileType.Directory];
+    }
 
     // Create stub directory instance that doesn't hold children
     // This is required so that parent Directory holds only child dirs/files,
