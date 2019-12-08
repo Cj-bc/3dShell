@@ -27,7 +27,7 @@ public class Shell : MonoBehaviour
 
         foreach (Entry e in pwd.children()) {
             GameObject newObj = Instantiate(e.model);
-            newObj.AddComponent("EntryHolder");
+            newObj.AddComponent<EntryHolder>();
             newObj.GetComponent<EntryHolder>().entry = e;
             entries.Add(newObj);
         }
