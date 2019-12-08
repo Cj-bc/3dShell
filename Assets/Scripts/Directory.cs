@@ -36,6 +36,6 @@ public class Directory : Entry
     // This is required so that parent Directory holds only child dirs/files,
     // not grandchildren /great-grandchildren, ...
     public static Directory getDirectoryStub(string d, Config _config)  {
-      return (Directory) (new Entry(d, _config));
+      return new Directory();
     }
 }
