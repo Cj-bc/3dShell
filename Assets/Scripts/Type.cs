@@ -6,6 +6,7 @@ namespace Type {
     public enum FileType { Any
                          , Image
                          , Movie
+                         , Directory
                          }
 
     public struct User {
