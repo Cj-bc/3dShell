@@ -16,6 +16,17 @@ public class Entry
 
     protected Config config;
 
+    public Entry() {
+        path = "";
+        entryName = "";
+        parent = null;
+        permission = 0;
+        lastTouched = System.DateTime.FromFileTime(0);
+        model = null;
+
+        config = null;
+    }
+
     public Entry(string _path, Config _config) {
         path = _path;
         entryName = _path.Split('/').Last();
