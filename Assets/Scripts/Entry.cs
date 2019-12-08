@@ -5,7 +5,7 @@ using UnityEngine;
 
 using Type;
 
-public class Entry : MonoBehaviour
+public class Entry
 {
     public string path;
     public string entryName;
