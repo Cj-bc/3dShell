@@ -11,7 +11,7 @@ public class Config : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        models.Add(FileType.Any, PrefabUtility.LoadPrefabContents("Assets/Prefab/models/Any"));
+        models.Add(FileType.Any, PrefabUtility.LoadPrefabContents(Application.dataPath + "/Prefab/models/Any.prefab"));
     }
 
     // Update is called once per frame
