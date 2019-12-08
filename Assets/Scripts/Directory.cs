@@ -26,6 +26,8 @@ public class Directory : Entry
         return ret;
     }
 
+    public Directory() : base () { }
+
     public Directory(string _path, Config _config) : base (_path, _config) {
             _children = this.getActualChildren();
         }
