@@ -13,7 +13,7 @@ public class Shell : MonoBehaviour
 
     Config config;
 
-    void Awake()
+    void Start()
     {
         config = GetComponent<Config>();
         // currentUser = System.Environment.UserName;
