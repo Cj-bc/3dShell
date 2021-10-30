@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Dir = System.IO.Directory;
 using Type;
 using System.IO;
@@ -14,12 +15,15 @@ public class Shell : MonoBehaviour
 
     public Config config;
 
+    public UnityEvent OnPwdChanged;
+
     void Start()
     {
         config = GetComponent<Config>();
         // currentUser = System.Environment.UserName;
-        pwd = new Directory(new DirectoryInfo(Environment.CurrentDirectory), config);
+        pwd = new Directory(new DirectoryInfo(Environment.CurrentDirectory), config, this);
         UpdateEntryObjects();
+	OnPwdChanged.AddListener(OnPwdChangedFunc);
     }
 
     void UpdateEntryObjects() {
@@ -31,6 +35,11 @@ public class Shell : MonoBehaviour
           return;
 
         Dir.SetCurrentDirectory(di.FullName);
+	OnPwdChanged.Invoke();
         UpdateEntryObjects();
+    }
+
+    void OnPwdChangedFunc() {
+	pwd = new Directory(new DirectoryInfo(Environment.CurrentDirectory), config, this);
     }
 }

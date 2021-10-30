@@ -5,7 +5,7 @@ using System.IO;
 
 public class File : Entry
 {
-    public File(FileInfo fi, Config cfg): base (fi, cfg) {
+    public File(FileInfo fi, Config cfg, Shell sh): base (fi, cfg, sh) {
         fileType = ftdetect();
     }
 

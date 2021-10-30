@@ -13,11 +13,15 @@ public class Entry
     public GameObject model;
 
     protected Config config;
+    protected Shell shell;
 
-    public Entry(FileSystemInfo info, Config cfg) {
+    public Entry(FileSystemInfo info, Config cfg, Shell sh) {
         this.info = info;
         config = cfg;
         model = cfg.models[Type.FileType.Any];
+	shell = sh;
+
+	shell.OnPwdChanged.AddListener(OnPwdChanged);
     }
 
     // public Entry(DirectoryInfo di, Config cfg) {
@@ -41,6 +45,10 @@ public class Entry
     //public void OnDestroyAnimation
     //public void OnPwdChanged
     //public void OnCreateAnimation
+
+
+    public void OnPwdChanged() {
+	// GameObject.Destroy(gameObject);
+	Debug.Log("Pwd changed");
+    }
 }
-
-
