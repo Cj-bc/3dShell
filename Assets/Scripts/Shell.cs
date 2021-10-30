@@ -3,33 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using Dir = System.IO.Directory;
 using Type;
+using System.IO;
+using System;
 
 public class Shell : MonoBehaviour
 {
-    Directory pwd;
-    List<GameObject> entries = new List<GameObject>();
+    public Directory pwd;
     // User currentUser;
     RuntimePlatform os;
 
-    Config config;
+    public Config config;
 
     void Start()
     {
         config = GetComponent<Config>();
         // currentUser = System.Environment.UserName;
-        pwd = new Directory(Dir.GetCurrentDirectory(), config);
-        updateEntryObjects();
+        pwd = new Directory(new DirectoryInfo(Environment.CurrentDirectory), config);
+        UpdateEntryObjects();
     }
 
-    void updateEntryObjects() {
-        if (entries.Count != 0)
-            foreach (GameObject obj in entries) {Destroy(obj);}
+    void UpdateEntryObjects() {
+        pwd.forEachChild((entry) => entry.Spawn());
+    }
 
-        foreach (Entry e in pwd.children()) {
-            GameObject newObj = Instantiate(e.model);
-            newObj.AddComponent<EntryHolder>();
-            newObj.GetComponent<EntryHolder>().entry = e;
-            entries.Add(newObj);
-        }
+    void Cd(DirectoryInfo di) {
+        if (!di.Exists)
+          return;
+
+        Dir.SetCurrentDirectory(di.FullName);
+        UpdateEntryObjects();
     }
 }

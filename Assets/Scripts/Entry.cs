@@ -2,39 +2,39 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 using Type;
 
 public class Entry
 {
-    public string path;
-    public string entryName;
-    public Entry  parent;
-    public int permission;
-    public System.DateTime lastTouched;
+    public FileSystemInfo info; // Holds either 'DirectoryInfo' or 'FileInfo'
+    public Type.FileType fileType;
     public GameObject model;
 
     protected Config config;
 
-    public Entry() {
-        path = "";
-        entryName = "";
-        parent = null;
-        permission = 0;
-        lastTouched = System.DateTime.FromFileTime(0);
-        model = null;
-
-        config = null;
+    public Entry(FileSystemInfo info, Config cfg) {
+        this.info = info;
+        config = cfg;
+        model = cfg.models[Type.FileType.Any];
     }
 
-    public Entry(string _path, Config _config) {
-        path = _path;
-        entryName = _path.Split('/').Last();
-        parent = null;
-        permission = 0b111000000; // TODO: get this from data
-        lastTouched = System.DateTime.FromFileTime(0); // TODO: get this from data
-        model = _config.models[Type.FileType.Any];
+    // public Entry(DirectoryInfo di, Config cfg) {
+    //     info = di;
+    //     fileType = Type.FileType.Directory;
+    //     config = cfg;
+    // }
 
-        config = _config;
+    // Spawn GameObject
+    public void Spawn() {
+        Object.Instantiate(model);
     }
+
+
+    //public void OnDestroyAnimation
+    //public void OnPwdChanged
+    //public void OnCreateAnimation
 }
+
+
