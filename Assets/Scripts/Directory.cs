@@ -7,31 +7,38 @@ using System;
 
 public class Directory : Entry
 {
-    private List<Entry> children;
+    private List<Directory> childDirectories;
+    private List<File> childFiles;
     public Directory(DirectoryInfo di, Config cfg): base (di, cfg) {
         model = cfg.models[Type.FileType.Directory];
     }
 
     public void SpawnChildren() {
-      foreach(DirectoryInfo d in ((DirectoryInfo)info).EnumerateDirectories()) {
-        var child = new Directory(d, config);
-        child.Spawn();
-        children.Add(child);
-      }
+		childDirectories = new List<Directory>();
+		childFiles = new List<File>();
+			
+		foreach(DirectoryInfo d in ((DirectoryInfo)info).EnumerateDirectories()) {
+			var child = new Directory(d, config, shell);
+			child.Spawn();
+			childDirectories.Add(child);
+		}
 
-      foreach(FileInfo i in ((DirectoryInfo)info).EnumerateFiles()) {
-        var child = new File(i, config);
-        child.Spawn();
-        children.Add(child);
-      }
+		foreach(FileInfo i in ((DirectoryInfo)info).EnumerateFiles()) {
+			var child = new File(i, config, shell);
+			child.Spawn();
+			childFiles.Add(child);
+		}
     }
 
     public void forEachChild(Action<Entry> f) {
-        foreach(DirectoryInfo d in ((DirectoryInfo)info).EnumerateDirectories())
-          f(new Directory(d, config));
+		if (childDirectories == null || childFiles == null)
+			SpawnChildren();
 
-        foreach(FileInfo i in ((DirectoryInfo)info).EnumerateFiles())
-          f(new File(i, config));
+        foreach(Directory d in childDirectories)
+			f(d);
+
+        foreach(File file in childFiles)
+			f(file);
     }
 
 }
