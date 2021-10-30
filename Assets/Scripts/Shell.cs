@@ -26,7 +26,7 @@ public class Shell : MonoBehaviour
         pwd.forEachChild((entry) => entry.Spawn());
     }
 
-    void Cd(DirectoryInfo di) {
+    public void Cd(DirectoryInfo di) {
         if (!di.Exists)
           return;
 
