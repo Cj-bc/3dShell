@@ -44,4 +44,8 @@ public class Directory : Entry
 			f(file);
     }
 
+    public override void OnClicked() {
+		Debug.Log($"Now Move to {info.Name}");
+		shell.Cd((DirectoryInfo)info);
+    }
 }

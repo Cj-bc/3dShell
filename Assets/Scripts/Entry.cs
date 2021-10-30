@@ -46,6 +46,9 @@ public class Entry
     //public void OnPwdChanged
     //public void OnCreateAnimation
 
+    public virtual void OnClicked() {
+	Debug.Log($"Clicked!: {info.Name.ToString()}");
+    }
 
     public void OnPwdChanged() {
 	// GameObject.Destroy(gameObject);
