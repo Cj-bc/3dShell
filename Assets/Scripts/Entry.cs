@@ -31,6 +31,10 @@ public class Entry
         GameObject m = Object.Instantiate(model);
         m.GetComponent<EntryHolder>().entry = this;
         m.name = info.Name;
+
+	m.GetComponent<MeshRenderer>()?.material.SetColor(
+	    "_BaseColor",
+	    new Color(Random.value, Random.value, Random.value));
     }
 
 
