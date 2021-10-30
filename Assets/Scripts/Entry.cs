@@ -33,7 +33,7 @@ public class Entry
         parent = null;
         permission = 0b111000000; // TODO: get this from data
         lastTouched = System.DateTime.FromFileTime(0); // TODO: get this from data
-        model = _config.models[FileType.Any];
+        model = _config.models[Type.FileType.Any];
 
         config = _config;
     }
