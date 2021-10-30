@@ -28,7 +28,8 @@ public class Entry
 
     // Spawn GameObject
     public void Spawn() {
-        Object.Instantiate(model);
+        GameObject m = Object.Instantiate(model);
+        m.GetComponent<EntryHolder>().entry = this;
     }
 
 
