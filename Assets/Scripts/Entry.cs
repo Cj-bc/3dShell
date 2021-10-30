@@ -30,6 +30,7 @@ public class Entry
     public void Spawn() {
         GameObject m = Object.Instantiate(model);
         m.GetComponent<EntryHolder>().entry = this;
+        m.name = info.Name;
     }
 
 
