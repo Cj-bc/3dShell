@@ -9,6 +9,7 @@ using System;
 
 public class Shell : MonoBehaviour
 {
+    private string InitialPwd;
     public Directory pwd;
     // User currentUser;
     RuntimePlatform os;
@@ -19,10 +20,12 @@ public class Shell : MonoBehaviour
 
     void Start()
     {
+	InitialPwd = Environment.CurrentDirectory;
         config = GetComponent<Config>();
         // currentUser = System.Environment.UserName;
         pwd = new Directory(new DirectoryInfo(Environment.CurrentDirectory), config, this);
         UpdateEntryObjects();
+
 	OnPwdChanged.AddListener(OnPwdChangedFunc);
     }
 
@@ -41,5 +44,11 @@ public class Shell : MonoBehaviour
 
     void OnPwdChangedFunc() {
 	pwd = new Directory(new DirectoryInfo(Environment.CurrentDirectory), config, this);
+    }
+
+    public void OnDestroy() {
+	// Make sure to reset current working directory.
+	// Otherwise UnityEditor will complain about this.
+	Dir.SetCurrentDirectory(InitialPwd);
     }
 }
