@@ -17,6 +17,6 @@ public class Hud : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pwdText.text = shell.pwd.info.FullName + ": " + shell.pwd.info.Name;
+        pwdText.text = shell.pwd.info.FullName;
     }
 }
