@@ -14,15 +14,12 @@ public class Shell : MonoBehaviour
     // User currentUser;
     RuntimePlatform os;
 
-    public Config config;
-
     void Start()
     {
 	InitialPwd = Environment.CurrentDirectory;
-        config = GetComponent<Config>();
         // currentUser = System.Environment.UserName;
-	pwd = Instantiate(config.models[Type.FileType.Directory]).GetComponent<Directory>();
-        pwd.Initialize(new DirectoryInfo(Environment.CurrentDirectory), config, this);
+	pwd = Instantiate(Config.Instance.models[Type.FileType.Directory]).GetComponent<Directory>();
+        pwd.Initialize(new DirectoryInfo(Environment.CurrentDirectory), this);
 	pwd.SpawnChildren();
     }
 
@@ -36,8 +33,8 @@ public class Shell : MonoBehaviour
 
     void OnPwdChanged() {
 	Destroy(pwd.gameObject);
-	pwd = Instantiate(config.models[Type.FileType.Directory]).GetComponent<Directory>();
-	pwd.Initialize(new DirectoryInfo(Environment.CurrentDirectory), config, this);
+	pwd = Instantiate(Config.Instance.models[Type.FileType.Directory]).GetComponent<Directory>();
+	pwd.Initialize(new DirectoryInfo(Environment.CurrentDirectory), this);
 	pwd.SpawnChildren();
     }
 

@@ -13,14 +13,14 @@ public class Directory : Entry<DirectoryInfo>
 			return;
 		
 		foreach(DirectoryInfo d in info.EnumerateDirectories()) {
-			GameObject m = Instantiate(config.models[Type.FileType.Directory]);
-			m.GetComponent<Directory>().Initialize(d, config, shell);
+			GameObject m = Instantiate(Config.Instance.models[Type.FileType.Directory]);
+			m.GetComponent<Directory>().Initialize(d, shell);
 			children.Add(m);
 		}
 		
 		foreach(FileInfo i in info.EnumerateFiles()) {
-			GameObject m = Instantiate(config.models[Type.FileType.Any]);
-			m.GetComponent<File>().Initialize(i, config, shell);
+			GameObject m = Instantiate(Config.Instance.models[Type.FileType.Any]);
+			m.GetComponent<File>().Initialize(i, shell);
 			children.Add(m);
 		}
     }
@@ -30,9 +30,9 @@ public class Directory : Entry<DirectoryInfo>
 		SpawnChildren();
     }
 
-    public override void Initialize(DirectoryInfo info, Config cfg, Shell sh) {
-		base.Initialize(info, cfg, sh);
-		model = cfg.models[Type.FileType.Directory];
+    public override void Initialize(DirectoryInfo info, Shell sh) {
+		base.Initialize(info, sh);
+		model = Config.Instance.models[Type.FileType.Directory];
     }
 
     public override void OnClicked() {

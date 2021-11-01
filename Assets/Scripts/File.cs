@@ -5,8 +5,8 @@ using System.IO;
 
 public class File : Entry<FileInfo>
 {
-    public override void Initialize(FileInfo info, Config cfg, Shell sh) {
-	base.Initialize(info, cfg, sh);
+    public override void Initialize(FileInfo info, Shell sh) {
+	base.Initialize(info, sh);
         fileType = ftdetect();
     }
 

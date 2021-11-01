@@ -12,13 +12,11 @@ public class Entry<InfoType>: MonoBehaviour where InfoType : FileSystemInfo
     public Type.FileType fileType;
     public GameObject model;
 
-    protected Config config;
     protected Shell shell;
 
-    public virtual void Initialize(InfoType info, Config cfg, Shell sh) {
+    public virtual void Initialize(InfoType info, Shell sh) {
         this.info = info;
-        config = cfg;
-        model = cfg.models[Type.FileType.Any];
+        model = Config.Instance.models[Type.FileType.Any];
 	shell = sh;
 
 	name = info.Name;
