@@ -12,18 +12,11 @@ public class Hud : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        OnPwdChanged();
-
-	shell.OnPwdChanged.AddListener(OnPwdChanged);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    void OnPwdChanged() {
-        pwdText.text = shell.pwd.info.Name;
+        pwdText.text = shell.pwd.info.FullName;
     }
 }

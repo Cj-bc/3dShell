@@ -14,23 +14,13 @@ public class Shell : MonoBehaviour
     // User currentUser;
     RuntimePlatform os;
 
-    public Config config;
-
-    public UnityEvent OnPwdChanged;
-
     void Start()
     {
 	InitialPwd = Environment.CurrentDirectory;
-        config = GetComponent<Config>();
         // currentUser = System.Environment.UserName;
-        pwd = new Directory(new DirectoryInfo(Environment.CurrentDirectory), config, this);
-        UpdateEntryObjects();
-
-	OnPwdChanged.AddListener(OnPwdChangedFunc);
-    }
-
-    void UpdateEntryObjects() {
-        pwd.forEachChild((entry) => entry.Spawn());
+	pwd = Instantiate(Config.Instance.models[Type.FileType.Directory]).GetComponent<Directory>();
+        pwd.Initialize(new DirectoryInfo(Environment.CurrentDirectory), this);
+	pwd.SpawnChildren();
     }
 
     public void Cd(DirectoryInfo di) {
@@ -38,12 +28,14 @@ public class Shell : MonoBehaviour
           return;
 
         Dir.SetCurrentDirectory(di.FullName);
-	OnPwdChanged.Invoke();
-        UpdateEntryObjects();
+	OnPwdChanged();
     }
 
-    void OnPwdChangedFunc() {
-	pwd = new Directory(new DirectoryInfo(Environment.CurrentDirectory), config, this);
+    void OnPwdChanged() {
+	Destroy(pwd.gameObject);
+	pwd = Instantiate(Config.Instance.models[Type.FileType.Directory]).GetComponent<Directory>();
+	pwd.Initialize(new DirectoryInfo(Environment.CurrentDirectory), this);
+	pwd.SpawnChildren();
     }
 
     public void OnDestroy() {
