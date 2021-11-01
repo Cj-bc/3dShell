@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1169139290936422382}
   - component: {fileID: 1169139290936422381}
   - component: {fileID: 1169139290936422380}
-  - component: {fileID: 6358255402314069466}
+  - component: {fileID: 1749360929318835296}
   m_Layer: 0
   m_Name: Directory
   m_TagString: Untagged
@@ -114,7 +114,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6358255402314069466
+--- !u!114 &1749360929318835296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,6 +123,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1169139290936422387}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 657085d0b0cf74379b79d0f4daa4296a, type: 3}
+  m_Script: {fileID: 11500000, guid: ca6ecdeaa13a041e7806b621a56cc8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fileType: 0
+  model: {fileID: 0}
+  children: []

@@ -3,47 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using Dir = System.IO.Directory;
-using System;
 
-public class Directory : Entry
+public class Directory : Entry<DirectoryInfo>
 {
-    private List<Directory> childDirectories;
-    private List<File> childFiles;
-
-    public Directory(DirectoryInfo di, Config cfg, Shell sh): base (di, cfg, sh) {
-        model = cfg.models[Type.FileType.Directory];
-    }
+	public List<GameObject> children;
 
     public void SpawnChildren() {
-		childDirectories = new List<Directory>();
-		childFiles = new List<File>();
-			
-		foreach(DirectoryInfo d in ((DirectoryInfo)info).EnumerateDirectories()) {
-			var child = new Directory(d, config, shell);
-			child.Spawn();
-			childDirectories.Add(child);
+		if (children.Count != 0)
+			return;
+		
+		foreach(DirectoryInfo d in info.EnumerateDirectories()) {
+			GameObject m = Instantiate(config.models[Type.FileType.Directory]);
+			m.GetComponent<Directory>().Initialize(d, config, shell);
+			children.Add(m);
 		}
-
-		foreach(FileInfo i in ((DirectoryInfo)info).EnumerateFiles()) {
-			var child = new File(i, config, shell);
-			child.Spawn();
-			childFiles.Add(child);
+		
+		foreach(FileInfo i in info.EnumerateFiles()) {
+			GameObject m = Instantiate(config.models[Type.FileType.Any]);
+			m.GetComponent<File>().Initialize(i, config, shell);
+			children.Add(m);
 		}
     }
 
-    public void forEachChild(Action<Entry> f) {
-		if (childDirectories == null || childFiles == null)
-			SpawnChildren();
+    public void RespawnChildren() {
+		KillChildren();
+		SpawnChildren();
+    }
 
-        foreach(Directory d in childDirectories)
-			f(d);
-
-        foreach(File file in childFiles)
-			f(file);
+    public override void Initialize(DirectoryInfo info, Config cfg, Shell sh) {
+		base.Initialize(info, cfg, sh);
+		model = cfg.models[Type.FileType.Directory];
     }
 
     public override void OnClicked() {
 		Debug.Log($"Now Move to {info.Name}");
-		shell.Cd((DirectoryInfo)info);
+		shell.Cd(info);
     }
+
+    public void KillChildren() {
+	// Kill all children here
+		foreach(GameObject m in children)
+			Destroy(m);
+    }
+
+	public void OnDestroy() {
+		KillChildren();
+	}
 }

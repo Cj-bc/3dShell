@@ -27,11 +27,13 @@ public class UserInput : MonoBehaviour
 		RaycastHit hit;
 
 		if (Physics.Raycast(ray, out hit)) {
-			var entryHolder = hit.collider.gameObject.GetComponent<EntryHolder>();
-			if (entryHolder == null)
+			File file = hit.collider.gameObject.GetComponent<File>();
+			Directory directory = hit.collider.gameObject.GetComponent<Directory>();
+			if (file == null && directory == null)
 				return;
 
-			entryHolder.entry.OnClicked();
+			file?.OnClicked();
+			directory?.OnClicked();
 		}
     }
 }

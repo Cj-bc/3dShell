@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class File : Entry
+public class File : Entry<FileInfo>
 {
-    public File(FileInfo fi, Config cfg, Shell sh): base (fi, cfg, sh) {
+    public override void Initialize(FileInfo info, Config cfg, Shell sh) {
+	base.Initialize(info, cfg, sh);
         fileType = ftdetect();
     }
 
