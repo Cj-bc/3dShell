@@ -10,8 +10,6 @@ public class Directory : Entry
     private List<Directory> childDirectories;
     private List<File> childFiles;
 
-    public Directory(DirectoryInfo di, Config cfg): base (di, cfg) {
-
     public Directory(DirectoryInfo di, Config cfg, Shell sh): base (di, cfg, sh) {
         model = cfg.models[Type.FileType.Directory];
     }
