@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 
 using Type;
@@ -24,6 +25,10 @@ namespace ThreeDShell {
 	    GetComponent<MeshRenderer>()?.material.SetColor(
 		"_BaseColor",
 		new Color(Random.value, Random.value, Random.value));
+	    
+	    var nameText = gameObject.GetComponentInChildren<Text>();
+	    if (nameText != null)
+		nameText.text = name;
 	    
 	}
 	
