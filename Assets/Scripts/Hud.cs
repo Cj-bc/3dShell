@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class Hud : MonoBehaviour
-{
-    public Text pwdText;
-    public Shell shell;
-
-    // Start is called before the first frame update
-    void Start()
+namespace ThreeDShell {
+    public class Hud : MonoBehaviour
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        pwdText.text = shell.pwd.info.FullName;
+	public Text pwdText;
+	public Shell shell;
+	
+	// Start is called before the first frame update
+	void Start()
+	{
+	}
+	
+	// Update is called once per frame
+	void Update()
+	{
+	    pwdText.text = shell.pwd.info.FullName;
+	}
     }
 }
