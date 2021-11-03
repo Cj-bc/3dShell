@@ -6,8 +6,9 @@ using System.IO;
 namespace ThreeDShell {
     public class File : Entry<FileInfo>
     {
-	public override void Initialize(FileInfo info, Shell sh) {
-	    base.Initialize(info, sh);
+	public override void Initialize(string _name, string uri
+					, Shell sh) {
+	    base.Initialize(_name, uri, sh);
 	    fileType = ftdetect();
 	}
 	

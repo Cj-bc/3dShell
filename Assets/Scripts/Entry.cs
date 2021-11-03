@@ -8,20 +8,26 @@ using System.IO;
 using Type;
 
 namespace ThreeDShell {
-    public class Entry<InfoType>: MonoBehaviour where InfoType : FileSystemInfo
+    public class Entry: MonoBehaviour
     {
-	public InfoType info; // Holds either 'DirectoryInfo' or 'FileInfo'
+	public string Name;
+	public string URI;
 	public Type.FileType fileType;
-	public GameObject model;
+	public GameObject prefab;
 	
 	protected Shell shell;
 	
-	public virtual void Initialize(InfoType info, Shell sh) {
-	    this.info = info;
-	    model = Config.Instance.models[Type.FileType.Any];
+	public virtual void Initialize(string _name, string uri
+				      , Shell sh) {
+	    Name = _name;
+	    URI = uri;
+	    Owner = owner;
+	    fileType = Type.FileType.Any;
+	    prefab = Config.Instance.models[fileType];
 	    shell = sh;
 	    
-	    name = info.Name;
+	    // Name of GameObject
+	    gameObject.name = _name;
 	    GetComponent<MeshRenderer>()?.material.SetColor(
 		"_BaseColor",
 		new Color(Random.value, Random.value, Random.value));

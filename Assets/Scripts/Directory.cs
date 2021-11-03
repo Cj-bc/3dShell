@@ -32,9 +32,12 @@ namespace ThreeDShell {
 	    SpawnChildren();
 	}
 	
-	public override void Initialize(DirectoryInfo info, Shell sh) {
-	    base.Initialize(info, sh);
-	    model = Config.Instance.models[Type.FileType.Directory];
+	public override void Initialize(string _name, string uri
+					, Shell sh, List<Entry> ch) {
+	    base.Initialize(_name, uri, sh);
+	    children = ch;
+	    fileType = Type.FileType.Directory
+	    prefab = Config.Instance.models[Type.FileType.Directory];
 	}
 	
 	public override void OnClicked() {
